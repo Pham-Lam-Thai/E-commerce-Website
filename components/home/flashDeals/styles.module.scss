@@ -1,0 +1,24 @@
+.flashDeals {
+    margin: 1rem 0;
+    background: #fff;
+    &_header{
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #fff;
+        font-weight: 900;
+        font-size: 25px;
+        text-transform: uppercase;
+        background: $yellow-color;
+        margin-bottom: 10px;
+    }
+    &_list {
+        display: flex;
+        flex-wrap: wrap;
+        padding-left: 1rem;
+        @media (max-width: 660px) {
+            justify-content: center;
+        }
+    }
+}

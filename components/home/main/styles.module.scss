@@ -1,0 +1,247 @@
+.main {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    gap: 10px;
+    grid-template-areas: 
+        "menu header header"
+        "menu swiper user"
+        "menu offers user";
+@media (max-width: 1232px) {
+    grid-template-columns: 1fr 3fr;
+}
+@media (max-width: 990px) {
+    grid-template-columns: 80px 3fr;
+}
+@media (max-width: 730px) {
+    grid-template-areas:
+    "menu"
+    "swiper"
+    "offers";
+    grid-template-columns: 1fr;
+    .menu {
+        width:100% !important;
+        height: fit-content !important;
+        &_list {
+            display: flex !important;
+            flex-wrap: wrap;
+            flex-direction: row !important;
+            justify-content: center;
+            li {
+                transform: translateY(-25px);
+            }
+        }
+    }
+}
+    .menu {
+        grid-area: menu;
+        height: 605px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: $shadow-1;
+        @media (max-width: 990px) {
+            width: 80px;
+            svg {
+                transform: scale(1.5);
+            }
+            &_list {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                ul {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+            }
+        }
+        &_header {
+            width: 100%;
+            height: 40px;
+            background: $grey-color;
+            border-bottom: 1px solid $grey-color;
+            box-shadow: $shadow-2;
+            @media (max-width: 990px) {
+                display: none !important;
+                svg,
+                b {
+                    display: none;
+                }
+            }
+            svg{
+                height: 23px;
+                width: 23px;
+            }
+            
+        }
+        &_list {
+            margin-top: 4px;
+        }
+        ul {
+            li {
+                height: 32px;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                &:hover {
+                    background: $success-color;
+                }
+                a {
+                    padding: 0 20px;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    color: rgb(57, 43, 43);
+                    svg {
+                        fill: #8c8484;
+                        stroke: #8c8484;
+                    }
+                    span {
+                        @media (max-width: 990px) {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+    .header {
+        grid-area: header;
+        height: 40px;
+        align-items: center;
+        display: flex;
+        @media (max-width: 730px) {
+            display: none !important;
+        }
+        ul {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            li {
+                height: 100%;
+                display: flex;
+                align-items: center;
+                font-size: 18px;
+                color: $blue-color;
+            }
+        }
+    }
+    .swiper {
+        grid-area: swiper;
+        background: #fff;
+        height: 300px;
+        border-radius: 10px;
+        box-shadow: $shadow-1;
+    }
+    .offers {
+        grid-area: offers;
+        overflow: hidden;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: $shadow-1;
+        height: 220px;
+        background-image: url("../../../public/images/flash.webp");
+        background-position: -270px -135px;
+        background-size: cover;
+    }
+    .user {
+        position: relative;
+        grid-area: user;
+        height: 557px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: $shadow-1;
+        @media (max-width: 123px) {
+            display: none;
+        }
+        &_header {
+        }
+        &_container {
+            padding: 1rem;
+        }
+        &_infos {
+            position: absolute;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            img {
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                box-shadow: $shadow-1;
+            }
+            h4 {
+                margin-top: 10px;
+                text-transform: capitalize;
+            }
+            &_btns {
+                margin-top: 1rem;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                button {
+                    width: 100px;
+                    height: 35px;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    font-weight: 600;
+                    &:first-of-type {
+                        background: linear-gradient($blue-color, #0000ff34);
+                        color: #fff;
+                    }
+                    &:last-of-type {
+                        color: #555;
+                    }
+                }
+            }
+        }
+        &_links {
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            li {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background: $grey-color;
+                display: grid;
+                place-items: center;
+                transition: 0.2s;
+                box-shadow: $shadow-1;
+                svg {
+                    width: 30px;
+                    height: 30px;
+                    stroke: $blue-color;
+                }
+                &:hover {
+                    background: $blue-color;
+                    svg {
+                        stroke: #fff;
+                    }
+                }
+                &:nth-of-type(3),
+                &:nth-of-type(4) {
+                    svg {
+                        fill: $blue-color;
+                    }
+                    &:hover {
+                        svg {
+                            fill: #fff;
+                        }
+                    }
+                }
+            }
+        }
+        &_footer {
+            position: absolute;
+            bottom: 0;
+            transform: rotate(180deg);
+        }
+    }
+}
