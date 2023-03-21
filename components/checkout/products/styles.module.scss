@@ -1,0 +1,54 @@
+.products{
+    padding: 1rem;
+    margin-top: 1rem;
+    border: 1px solid #ccc;
+    &_header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &_wrap{
+        padding-top: 1rem;
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+    &_total{
+        margin-top: 1rem;
+        padding: 10px;
+        border-top: 2px solid #ccc;
+    }
+}
+.product{
+    &_img{
+        position: relative;
+        img{
+            border-radius: 5px;
+            width: 140px;
+            height: 180px;
+            object-fit: cover;
+        }
+    }
+    &_infos{
+        padding: 5px;
+        display: flex;
+        background: #f3f2f0;
+        align-items: center;
+        font-weight: 700;
+        justify-content: space-between;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        img{
+            width: 30px;
+            height: 30px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    }
+    &_name{
+        font-size: 13px;
+        margin-top: 2px;
+    }
+}

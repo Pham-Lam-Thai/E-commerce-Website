@@ -1,6 +1,6 @@
 $blue-color:#2f82ff;
-$grey-color:#f8f8f8;
-$yellow-color:#fac80f;
+$grey-color:#f1eded;
+$yellow-color:#efcb48;
 $violet-color:#5a31f4;
 $redish-color:#f15f6f;
 $light-error-color: #fd010169;
@@ -41,6 +41,9 @@ $shadow-2:rgba(99,99,99,0.1) 0px 0px 4px 0px;
     display: flex;
     align-items: center;
     gap: 5px;
+}
+.wrap{
+    flex-wrap: wrap;
 }
 .error {
     padding: 10px;
@@ -89,8 +92,15 @@ $shadow-2:rgba(99,99,99,0.1) 0px 0px 4px 0px;
 }
   
 .swiper {
-    margin-left: auto;
+    margin-left: 0 !important;
     margin-right: auto;
+    cursor: pointer;
+    &:hover{
+        .swiper-button-prev,
+        .swiper-button-next{
+            display: grid;
+        }
+    }
 }
 .mainSwiper,
 .user_swiper,
@@ -226,6 +236,50 @@ $shadow-2:rgba(99,99,99,0.1) 0px 0px 4px 0px;
         img {
             height: 240px !important;
 
+        }
+    }
+}
+.flashDeals_swiper {
+    .swiper-slide {
+        img{
+            border-radius: 0 !important;
+            height: 320px !important;
+        }
+    }
+    .swiper-button-next,.swiper-button-prev {
+        top: 35%;
+    }
+}
+.products_swiper {
+    .swiper-button-next,
+    .swiper-button-prev{
+        background: #fff;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: grid;
+        place-content: center;
+        color: #666;
+        box-shadow: $shadow-1;
+        &::after {
+            transform: scale(0.5);
+        }
+    }
+}
+.simillar_swiper{
+    max-width: 500px;
+    padding-left: 0 !important;
+    .swiper-pagination{
+        display: none !important;
+    }
+    img {
+        width: 100px;
+        height: 160px;
+        object-fit: cover;
+        cursor: pointer;
+        @media (min-width:461px) {
+            width: 150px;
+            height: 200px;
         }
     }
 }

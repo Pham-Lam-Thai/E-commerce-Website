@@ -8,8 +8,8 @@ import * as Yup from "yup";
 import LoginInput from "../components/inputs/loginInput";
 import { useState } from "react";
 import CircledIconBtn from "../components/buttons/circledIconBtn";
-import { getProviders, signIn } from "next-auth/react";
-import { Provider } from "react-redux";
+import { getProviders, signIn, getCsrfToken, getSession } from "next-auth/react";
+
 const initialvalues = {
   login_email: "",
   login_password: "",
@@ -100,7 +100,9 @@ export default function signin({providers}) {
                   {providers.map((provider)=>(
                     <div key={provider.name}>
                       <button className={styles.social_btn}
-                      onClick={() => signIn(provider.id)}
+                      onClick={() => signIn(provider.id, {
+                        callbackUrl: `${window.location.origin}/`,
+                      })}
                       >
                         <img src={`../../icons/${provider.name}.png`} alt=""/>
                         Sign In With {provider.name}
@@ -169,8 +171,25 @@ export default function signin({providers}) {
 }
 
 export async function getServerSideProps(context){
+  const { req, query } = context;
+
+  const session = await getSession({ req });
+  const { callbackUrl } = query;
+
+  if (session) {
+    return {
+      redirect: {
+        destination: callbackUrl,
+      },
+    };
+  }
+  const csrfToken = await getCsrfToken(context);
   const providers = Object.values(await getProviders());
   return {
-    props: { providers },
+    props: {
+      providers,
+      csrfToken,
+      callbackUrl,
+    },
   };
 }

@@ -293,7 +293,7 @@ export const userSwiperArray = [
 export const flashDealsArray = [
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/09/15/1663220709c947ca4ad9aefd9c1f4baf5915653468_thumbnail_600x.webp",
+      "https://img.ltwebstatic.com/images3_pi/2023/01/30/167504247074923b92bd41e2c6075954a2961e0cdb_thumbnail_900x.webp",
     price: "91",
     discount: "11",
     link: "",
@@ -301,7 +301,7 @@ export const flashDealsArray = [
   },
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/09/20/1663668243e6d8f250648c2f34988320c046cba68f_thumbnail_405x552.webp",
+      "https://img.ltwebstatic.com/images3_pi/2022/11/09/1667973430178077be0e2f47ba21908c12deabb04b_thumbnail_810x.webp",
     price: "73",
     discount: "25",
     link: "",
@@ -309,7 +309,7 @@ export const flashDealsArray = [
   },
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/03/25/164818761997d2ccb1de50aed18da9d77502717405_thumbnail_405x552.webp",
+      "https://img.ltwebstatic.com/images3_pi/2023/03/02/167772039652cf483fe7e94d7d4b1614782ae1dac9_thumbnail_900x.webp",
     price: "254",
     discount: "36",
     link: "",
@@ -317,7 +317,7 @@ export const flashDealsArray = [
   },
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/05/13/165244123600952e503ccab89dd363c9b71f9094f8_thumbnail_405x552.webp",
+      "https://img.ltwebstatic.com/images3_pi/2023/02/17/16766163574195abebd9df965422c77c73d9b82063_thumbnail_900x.webp",
     price: "1687",
     discount: "20",
     link: "",
@@ -325,7 +325,7 @@ export const flashDealsArray = [
   },
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/06/17/16554568735029a68267cacc48382e23027667093f_thumbnail_405x552.webp",
+      "https://img.ltwebstatic.com/images3_pi/2023/02/26/1677406357b27c948b5805e9c3b269bd1b107416ec_thumbnail_900x.webp",
     price: "126",
     discount: "8",
     link: "",
@@ -359,85 +359,85 @@ export const flashDealsArray = [
 export const women_dresses = [
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/01/10/16417808659209e55eaeb6216fe1b0ab7569f434e9_thumbnail_600x.webp",
+      "https://img.ltwebstatic.com/images3_pi/2023/02/23/167711673611574320f7a2f468bd6d83a8da75bc7d_thumbnail_900x.webp",
     price: "79.58",
   },
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/04/25/16508565378f388bf7e888c2bc94273e9953d22100_thumbnail_600x.webp",
+      "https://img.ltwebstatic.com/images3_pi/2023/02/23/1677116749d592b4b6020763d79fd5df52b781634a_thumbnail_900x.webp",
     price: "",
   },
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/03/24/164810755649b8cabd855efc56aa7a0a6b422962fe_thumbnail_600x.webp",
+      "https://img.ltwebstatic.com/images3_pi/2023/03/06/16780813391544306cc21a21c8fd95c4fc300e54ff_thumbnail_900x.webp",
     price: "",
   },
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/04/11/164964281857e58b1fa7a38f9fff092384f23801f9_thumbnail_600x.webp",
+      "https://img.ltwebstatic.com/images3_pi/2023/01/30/16750424679390c6e35919dd897a30cf28da570ef8_thumbnail_900x.webp",
     price: "",
   },
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2021/10/15/16342654110372b23c51d76ca165537318bd0828f1_thumbnail_600x.webp",
+      "https://img.ltwebstatic.com/images3_pi/2023/02/17/16766163779e0f9e43e3b770e178f4cb8d5627eded_thumbnail_900x.webp",
     price: "",
   },
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/02/21/1645432934d3afbf3ceebe3cbeb48019a7e4098f0f_thumbnail_600x.webp",
+      "https://img.ltwebstatic.com/images3_pi/2023/01/14/1673660117b70e524b1c664b1602371367758475b4_thumbnail_900x.webp",
     price: "",
   },
 ];
 export const women_shoes = [
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2021/04/24/16192428449d0a2f9df3090b84cded584abe64c71e_thumbnail_600x.webp",
+      "https://img.ltwebstatic.com/images3_pi/2023/02/16/167651365925f642d591c3e3b7f3bb16c8b28120a5_thumbnail_900x.webp",
   },
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/06/14/165517428253e93bd6a795d9a97c21810ef1beb61c_thumbnail_600x.webp",
+      "https://img.ltwebstatic.com/images3_pi/2022/11/25/1669338945588556f9cb96a63b6c5698defcb79a11_thumbnail_900x.webp",
   },
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2021/07/28/1627454227e78cf5c9d505d6c45a1c11e6c9b83625_thumbnail_600x.webp",
+      "https://img.ltwebstatic.com/images3_pi/2022/03/21/16478295560fa6e70a1d24da0bbc7849d36951aade_thumbnail_900x.webp",
   },
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/05/13/1652449751b1c4055651a96b57ae161885def48c15_thumbnail_600x.webp",
+      "https://img.ltwebstatic.com/images3_pi/2023/03/01/167763545564f78c88110bb765f505f71096de6bfe_thumbnail_900x.webp",
   },
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2021/08/13/1628869751ad4c4dbe554b72f65af9d5c532528f6c_thumbnail_600x.webp",
+      "https://img.ltwebstatic.com/images3_pi/2023/02/24/16772069224128bd6f5d5b55ae71b36367e7add15c_thumbnail_900x.webp",
   },
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/04/27/1651047458260c8e9c705b77227c9acdba9104c367_thumbnail_600x.webp",
+      "https://img.ltwebstatic.com/images3_pi/2023/02/15/1676425410a7fea6eb4fdf3d7676174389d4e560c8_thumbnail_900x.webp",
   },
 ];
 export const women_accessories = [
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/05/12/1652333770b01690f4b990751e070cc10e4682b39d_thumbnail_600x.webp",
+      "https://img.ltwebstatic.com/images3_pi/2023/02/26/1677406357b27c948b5805e9c3b269bd1b107416ec_thumbnail_900x.webp",
   },
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2021/10/18/1634549753f940286e6a06890c2a30302bbdbbf665_thumbnail_600x.webp",
+      "https://img.ltwebstatic.com/images3_pi/2023/01/17/1673949436889aa662d3fead6f53eedcf0903d88dd_thumbnail_900x.webp",
   },
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/03/15/1647310895dcbf38181ac1254338a636f64c94384b_thumbnail_600x.webp",
+      "https://img.ltwebstatic.com/images3_pi/2022/10/18/16660699599d98b4114e4bd0409c089dbb4e0f098e_thumbnail_900x.webp",
   },
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/05/13/1652449751b1c4055651a96b57ae161885def48c15_thumbnail_600x.webp",
+      "https://img.ltwebstatic.com/images3_pi/2023/02/28/16775830538f3193f47a42ec89c768d078d7fa251b_thumbnail_900x.webp",
   },
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/06/07/1654567858a331ceb5ce709ed8e53bc50b390d19f9_thumbnail_600x.webp",
+      "https://img.ltwebstatic.com/images3_pi/2023/02/28/16775830512c9bfec5fd9636fda9279cd8cd9e4f94_thumbnail_900x.webp",
   },
   {
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/06/20/16557062656c0432e06a65323afab13e64550c45d6_thumbnail_600x.webp",
+      "https://img.ltwebstatic.com/images3_pi/2022/09/26/1664174683c4e251daecc8f6fa40b1690e4ad8a715_thumbnail_900x.webp",
   },
 ];
 

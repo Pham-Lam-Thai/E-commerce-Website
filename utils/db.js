@@ -1,4 +1,3 @@
-import { Moo_Lah_Lah } from "@next/font/google";
 import mongoose from "mongoose";
 const connection = {};
 

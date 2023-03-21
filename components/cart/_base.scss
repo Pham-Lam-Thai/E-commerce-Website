@@ -1,0 +1,23 @@
+.card{
+    padding: 1rem;
+    //margin-top: 1rem;
+    background: #fff;
+}
+.active{
+    background-size: cover;
+    background-image: url("../../public/images/selected.png");
+}
+.header{
+    font-size: 22px;
+    color: #222 !important;
+}
+.checkbox{
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1px solid #cccccc;
+    cursor: pointer;
+    &:hover{
+        color: $blue-color;
+    }
+}

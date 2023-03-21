@@ -1,4 +1,3 @@
-import { Ultra } from "@next/font/google";
 import Link from "next/link";
 import styles from "./styles.module.scss";
 import { signOut,signIn } from "next-auth/react";
