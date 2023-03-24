@@ -2,8 +2,86 @@ import Order from "../../models/Order";
 import Header from "../../components/header";
 import styles from "../../styles/order.module.scss";
 import { IoIosArrowForward } from "react-icons/io";
+import db from "../../utils/db";
+import User from "../../models/User";
+import { PayPalButtons, PayPalScriptProvider, usePayPalScriptReducer } from "@paypal/react-paypal-js";
+import { useEffect, useReducer } from "react";
+import StripePayment from "../../components/stripePayment";
+function reducer(state, action){
+    switch(action.type){
+        case "PAY_REQUEST":
+            return {...state, loading: true };
+        case "PAY_SUCCESS":
+            return {...state, loading: true, success: true };
+        case "PAY_FAIL":
+            return {...state, loading: true, error: action.payload};
+        case "PAY_RESET":
+            return {...state, loading: true, success: false, error: false };
+    }
+}
+export default function order({
+    orderData, 
+    paypal_client_id, 
+    stripe_public_key
+}){
+    const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
+    const [{ success },dispatch] = useReducer(reducer, {
+      loading: true,
+      error: "",
+      success: "",
+    });
+    useEffect(() => {
+        if (!orderData._id) {
+          dispatch({
+            type: "PAY_RESET",
+          });
+        } else {
+          paypalDispatch({
+            type: "resetOptions",
+            value: {
+              "client-id": paypal_client_id,
+              currency: "USD",
+            },
+          });
+          paypalDispatch({
+            type: "setLoadingStatus",
+            value: "pending",
+          });
+        }
+      }, [order]);
+    function createOrderHandler(){
+        return actions.order
+        .create({
+            purchase_units: [
+            {
+                amount: {
+                value: orderData.total,
+                },
+            },
+            ],
+        })
+        .then((order_id) => {
+            return order_id;
+        });
+    }
+    function onApproveHandler(){
+        return actions.order.capture().then(async function (details) {
+            try {
+              dispatch({ type: "PAY_REQUEST" });
+              const { data } = await axios.put(
+                `/api/order/${orderData._id}/pay`,
+                details
+              );
+              dispatch({ type: "PAY_SUCCESS", payload: data });
+            } catch (error) {
+              dispatch({ type: "PAY_ERROR", payload: error });
+            }
+        });
+    }
+    function onErrorHandler({error}){
+        console.log(error);
+    }
 
-export default function order({orderData}) {
     return (
         <>
           <Header country="country" />
@@ -17,7 +95,7 @@ export default function order({orderData}) {
                   </div>
                   <div className={styles.order_header_status}>
                     Payment Status :{" "}
-                    {orderData.isPaid ? (
+                    {!orderData.isPaid ? (
                       <img src="../../../images/verified.png" alt="paid" />
                     ) : (
                       <img src="../../../images/unverified.png" alt="paid" />
@@ -142,7 +220,7 @@ export default function order({orderData}) {
                     <span>{orderData.shippingAddress.zipCode}</span>
                     <span>{orderData.shippingAddress.country}</span>
                   </div>
-                  <div className={styles.order__address_shipping}>
+                  <div className={styles.order_address_shipping}>
                     <h2>Billing Address</h2>
                     <span>
                       {orderData.shippingAddress.firstName}{" "}
@@ -158,33 +236,31 @@ export default function order({orderData}) {
                     <span>{orderData.shippingAddress.country}</span>
                   </div>
                 </div>
-                {/* {!orderData.isPaid && (
-                  <div className={styles.order__payment}>
-                    {orderData.paymentMethod == "paypal" && (
-                      <div>
-                        {isPending ? (
-                          <span>loading...</span>
-                        ) : (
-                          <PayPalButtons
-                            createOrder={createOrderHanlder}
-                            onApprove={onApproveHandler}
-                            onError={onErroHandler}
-                          ></PayPalButtons>
+                {!orderData.isPaid && (
+                    <div className={styles.order_payment}>
+                        {orderData.paymentMethod == "paypal" && (
+                            <div>
+                            {isPending ? (
+                                <span>Loading....</span>
+                            ):(
+                                <PayPalButtons
+                                    createOrder={createOrderHandler}
+                                    onApprove={onApproveHandler}
+                                    onError={onErrorHandler}
+                                >
+                                </PayPalButtons>
+                            )}
+                            </div>
                         )}
-                      </div>
-                    )}
-                    {orderData.paymentMethod == "credit_card" && (
-                      <StripePayment
-                        total={orderData.total}
-                        order_id={orderData._id}
-                        stripe_public_key={stripe_public_key}
-                      />
-                    )}
-                    {orderData.paymentMethod == "cash" && (
-                      <div className={styles.cash}>cash</div>
-                    )}
-                  </div>
-                )} */}
+                        {orderData.paymentMethod == "credit_card" && (
+                            <StripePayment
+                                total={orderData.total}
+                                order_id={orderData._id }
+                                stripe_public_key={stripe_public_key}
+                            />
+                        )}
+                    </div>
+                )}
               </div>
             </div>
           </div>
@@ -193,14 +269,19 @@ export default function order({orderData}) {
 }
 
 export async function getServerSideProps(context){
+    db.connectDb()
     const { query } = context;
     const id  = query.id;
-    const order = await Order.findById(id).populate("user").lean();
-    console.log(order);
-
+    const order = await Order.findById(id).populate({ path: "user",model: User }).lean();
+    let paypal_client_id = process.env.PAYPAL_CLIENT_ID;
+    let stripe_public_key = process.env.STRIPE_PUBLIC_KEY;
+    //console.log(paypal_client_id);
+    db.disconnectDb();
     return{
         props:{
             orderData: JSON.parse(JSON.stringify(order)),
+            paypal_client_id,
+            stripe_public_key,
         },
     };
 }

@@ -1,0 +1,51 @@
+.label{
+    display: flex;
+    height: 42px;
+    align-items: center;
+    border: 1px solid #cccccc8e;
+    overflow: hidden;
+    margin: 1rem 0;
+    span{
+        display: block;
+        font-size: 15px;
+        font-weight: 700;
+        background: $blue-color;
+        display: grid;
+        color: #fff;
+        place-items: center;
+        padding: 0 10px;
+        width: 100px;
+        height: 100%;
+
+    }
+    input,
+    textarea{
+        border: none;
+        outline: none;
+        width: 100px;
+        height: 100%;
+        flex: 1;
+        background: transparent;
+        padding-left: 5px;
+        color: #111 !important;
+        &::placeholder{
+            color: #666;
+        }
+    }
+}
+
+.inputError{ 
+    span{
+        background: $error-color !important;
+    }
+    input{
+        background: rgba(255, 0, 0, 0.031) !important;
+        border: 1px solid $error-color !important;
+    }
+    &_msg{
+        font-size: 14px;
+        margin-left: 105px;
+        color: $error-color;
+        margin-top: -13px;
+    }
+}

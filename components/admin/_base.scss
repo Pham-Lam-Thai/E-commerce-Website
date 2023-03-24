@@ -1,0 +1,44 @@
+.btnWrap{
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+.btn{
+    min-width: 120px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: 1px solid #222;
+    margin-top: 10px;
+    transition: all 0.1s;
+    &_primary{
+        color: #fff;
+        background: $blue-color;
+    }
+    &:hover{
+        color: $blue-color;
+    }
+}
+.header{
+    font-weight: 700;
+    font-size: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    .flex{
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    span{
+        display: block;
+        font-size: 14px;
+        font-weight: normal;
+    }
+    img{
+        width: 30px;
+    }
+}

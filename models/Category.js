@@ -1,25 +1,28 @@
 import mongoose from "mongoose";
 
-const {ObjectId} = mongoose.Schema;
+const { ObjectId } = mongoose.Schema;
 
-const categorySchema = new mongoose.Schema({
+const categorySchema = new mongoose.Schema(
+  {
     name: {
-        type: String,
-        required: true,
-        minlength: [2, " must be at least 2 characters."],
-        maxlength: [32, " must be maximum 32 characters."],
+      type: String,
+      required: true,
+      minlength: [2, "must be atleast 2 charcters"],
+      maxlength: [32, "must be atleast 2 charcters"],
     },
     slug: {
-        type: String,
-        unique: true,
-        lowercase: true,
-        index: true,
+      type: String,
+      unique: true,
+      lowercase: true,
+      index: true,
     },
-},{
+  },
+  {
     timestamps: true,
-});
+  }
+);
 
-
-const Category = mongoose.models.Category || mongoose.model("Category", categorySchema);
+const Category =
+  mongoose.models.Category || mongoose.model("Category", categorySchema);
 
 export default Category;

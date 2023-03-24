@@ -4,6 +4,9 @@
         display: grid;
         gap: 1rem;
         grid-template-columns: 2.5fr 1fr;
+        @media (max-width: 700px) {
+            grid-template-columns: 1fr;
+        }
     }
     &_infos{
         display: flex;
@@ -85,12 +88,14 @@
         }
     }
     &_actions{
+        display: flex;
         height: fit-content;
-        box-shadow: $shadow-1;
-        padding: 1rem 0;
+        flex-direction: column;
+        gap: 1rem;
     }
     &_address{
-        padding: 0 1rem;
+        box-shadow: $shadow-1;
+        padding: 1rem;
         h1{
             font-size: 23px;
             margin-top: 1rem;
@@ -126,6 +131,10 @@
                 display: block;
             }
         }
+    }
+    &_payment{
+        padding: 1rem;
+        box-shadow: $shadow-1;
     }
 }
 .not_processed{

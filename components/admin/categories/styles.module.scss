@@ -1,0 +1,43 @@
+@import "../base";
+.list{
+    margin-top: 1rem;
+    &_item{
+        padding: 10px;
+        margin-top: 10px;
+        background: $blue-color;
+        color: #fff;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        @media (max-width:800px) {
+            flex-direction: column;
+            gap: 10px;
+        }
+        svg{
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+        input{
+            border: none;
+            outline: none;
+            padding: 1rem;
+            color: #fff;
+            background: transparent;
+        }
+        &_expand{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            button:hover{
+                background: $blue-color;
+            }
+        }
+    }
+}
+.open{
+    background: #fff !important;
+    color: #111 !important;
+}

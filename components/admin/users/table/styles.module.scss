@@ -1,0 +1,33 @@
+.table{
+    thead{
+        background: $blue-color;
+        th {
+            color: #fff !important;
+        }
+        
+    }
+    tbody{
+        td{
+            svg{
+                height: 28px;
+                width: 28px;
+                cursor: pointer;
+                &:hover{
+                    fill: $error-color;
+                }
+            }
+            //text-align: left;
+        }
+    }
+    &_img{
+        padding-top: 5px;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: $shadow-1;
+    } 
+    .ver{
+        width: 30px;
+    }
+}

@@ -1,0 +1,48 @@
+.product{
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+    &_name{
+        padding: 0 5px;
+        font-size: 16px;
+    }
+    &_category{
+        font-size: 13px;
+        color: $error-color;
+        font-weight: normal;
+        padding-left: 5px;
+    }
+    &_item{
+        box-shadow: $shadow-1;
+        a_img{
+            width: 230px;
+            height: 280px;
+            img{
+                width: 100px;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+    &_actions{
+        margin-top: 10px;
+        align-items: center;
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        padding: 5px;
+        svg{
+            width: 30px;
+            height: 30px;
+            &:nth-of-type(1){
+                stroke: $blue-color;
+            }
+            &:nth-of-type(2){
+                fill: $error-color;
+            }
+            &:nth-of-type(3){
+                fill: $success-color;
+            }
+        }
+    }
+}
