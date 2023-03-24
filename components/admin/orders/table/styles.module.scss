@@ -10,6 +10,19 @@
             font-size: 15px;
         }
     }
+    &_img{
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: $shadow-1;
+    }
+    &_productImg{
+        height: 150px;
+        height: 100px;
+        object-fit: cover;
+        box-shadow: $shadow-1;
+    }
 }
 .ver{
     width: 32px;
