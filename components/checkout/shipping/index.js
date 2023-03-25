@@ -26,6 +26,7 @@ const initialValues = {
 
 }
 export default function Shipping({ selectedAddress, setSelectedAddress, user, addresses,setAddresses }) {
+  console.log('address--->',addresses)
   const [shipping, setShipping] = useState(initialValues);
   const [visible, setVisible] = useState(user?.address.length ? false : true);
 
@@ -80,6 +81,7 @@ export default function Shipping({ selectedAddress, setSelectedAddress, user, ad
   };
   const saveShippingHandler = async () => {
     const res = await saveAddress(shipping);
+    console.log('res', res)
     setAddresses(res.addresses);
   };
   const changeActiveHandler = async (id) => {

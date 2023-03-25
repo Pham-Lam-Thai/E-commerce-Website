@@ -1,6 +1,6 @@
 import Layout from "../../../components/admin/layout";
 import styles from "../../../styles/dashboard.module.scss";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 import User from "@/models/User";
 import Order from "@/models/Order";
 import Product from "@/models/Product";
@@ -9,10 +9,12 @@ import { useSession } from "next-auth/react";
 import Dropdown from "@/components/admin/dashboard/dropdown";
 import Notifications from "@/components/admin/dashboard/notifications";
 import { TbUser } from "react-icons/tb";
-import {SlHandbag, slHandbag} from "react-icons/sl";
+import { SlEye, SlHandbag, slHandbag } from "react-icons/sl";
 import { SiProducthunt } from "react-icons/si";
 import { GiTakeMyMoney } from "react-icons/gi";
+import Link from "next/link";
 export default function dashboard({ users, orders, products }) {
+  console.log(orders)
   const { data: session } = useSession();
   return (
     <div>
@@ -23,18 +25,18 @@ export default function dashboard({ users, orders, products }) {
         <div className={styles.header}>
           <div className={styles.header_search}>
             <label htmlFor="">
-              <input type="text" placeholder="Search here..."/>
+              <input type="text" placeholder="Search here..." />
             </label>
           </div>
           <div className={styles.header_right}>
-            <Dropdown userImage={session?.user?.image}/>
-            <Notifications/>
+            <Dropdown userImage={session?.user?.image} />
+            <Notifications />
           </div>
         </div>
         <div className={styles.cards}>
           <div className={styles.card}>
             <div className={styles.card_icon}>
-              <TbUser/>
+              <TbUser />
             </div>
             <div className={styles.card_infos}>
               <h4>+{users.length}</h4>
@@ -43,7 +45,7 @@ export default function dashboard({ users, orders, products }) {
           </div>
           <div className={styles.card}>
             <div className={styles.card_icon}>
-              <SlHandbag/>
+              <SlHandbag />
             </div>
             <div className={styles.card_infos}>
               <h4>+{orders.length}</h4>
@@ -52,7 +54,7 @@ export default function dashboard({ users, orders, products }) {
           </div>
           <div className={styles.card}>
             <div className={styles.card_icon}>
-              <SiProducthunt/>
+              <SiProducthunt />
             </div>
             <div className={styles.card_infos}>
               <h4>+{products.length}</h4>
@@ -61,15 +63,15 @@ export default function dashboard({ users, orders, products }) {
           </div>
           <div className={styles.card}>
             <div className={styles.card_icon}>
-              <GiTakeMyMoney/>
+              <GiTakeMyMoney />
             </div>
             <div className={styles.card_infos}>
-              <h4>+{(orders.reduce((a, val) => a + val.total,0))}$</h4>
+              <h4>+{(orders.reduce((a, val) => a + val.total, 0))}$</h4>
               <h5>
                 +{
                   (orders
                     .filter((o) => !o.isPaid)
-                    .reduce((a, val) =>a + val.total,0)
+                    .reduce((a, val) => a + val.total, 0)
                   )
                 }
                 $ Unpaid yet.
@@ -78,19 +80,93 @@ export default function dashboard({ users, orders, products }) {
             </div>
           </div>
         </div>
+        <div className={styles.data}>
+          <div className={styles.orders}>
+            <div className={styles.heading}>
+              <h2>Recent Order</h2>
+              <Link legacyBehavior href="/admin/dashboard/orders">View All</Link>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <td>Name</td>
+                  <td>Total</td>
+                  <td>Payment</td>
+                  <td>Status</td>
+                  <td>View</td>
+                </tr>
+              </thead>
+              <tbody>
+                {orders.map((order) => (
+                  <tr>
+                    <td>{order.user.name}</td>
+                    <td>{order.total}</td>
+                    <td>{order.isPaid ? (<img src="../../../images/verified.webp" alt="" />) : (<img src="../../../images/unverified1.png" alt="" />)}</td>
+                    <td>
+                      <div
+                        className={`${styles.status} ${order.status == "Not Processed"
+                          ? styles.not_processed
+                          : order.status == "Processing"
+                            ? styles.processing
+                            : order.status == "Dispatched"
+                              ? styles.dispatched
+                              : order.status == "Cancelled"
+                                ? styles.cancelled
+                                : order.status == "Completed"
+                                  ? styles.completed
+                                  : ""
+                          }`}
+                      >
+                        {order.status}
+                      </div>
+                    </td>
+                    <td>
+                      <Link href={`/order/${order._id}`}>
+                        <SlEye />
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className={styles.users}>
+            <div className={styles.heading}>
+              <h2>Recent Users</h2>
+              <Link href="/admin/dashboard/users">View All</Link>
+            </div>
+            <table>
+              <tbody>
+                {users.map((user) => (
+                  <tr>
+                    <td className={styles.user}>
+                      <div className={styles.user_img}>
+                        <img src={user.image} alt="" />
+                      </div>
+                      <td>
+                        <h4>{user.name}</h4>
+                        <span>{user.email}</span>
+                      </td>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </Layout>
     </div>
   );
 }
 
-export async function getServerSideProps({ req }){
+export async function getServerSideProps({ req }) {
   const users = await User.find().lean();
   const orders = await Order.find()
-    .populate({ path: "user", model: User})
+    .populate({ path: "user", model: User })
     .lean();
   const products = await Product.find().lean();
-  return{
-    props:{
+  return {
+    props: {
       users: JSON.parse(JSON.stringify(users)),
       orders: JSON.parse(JSON.stringify(orders)),
       products: JSON.parse(JSON.stringify(products)),
