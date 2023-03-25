@@ -17,6 +17,7 @@ export default function checkout({cart, user}) {
     const [paymentMethod, setPaymentMethod] = useState("");
     const [totalAfterDiscount, setTotalAfterDiscount] = useState("");
 
+
     useEffect(() => {
         let check = addresses.find((ad) => ad.active == true);
         if (check) {
@@ -24,6 +25,8 @@ export default function checkout({cart, user}) {
         } else {
           setSelectedAddress("");
         }
+    console.log('addresses', addresses)
+        
       }, [addresses]);
       //console.log("selectedAddress", selectedAddress);
   return (
@@ -32,7 +35,7 @@ export default function checkout({cart, user}) {
        <div className={`${styles.container} ${styles.checkout}`}>
             <div className={styles.checkout_side}>
                 <Shipping 
-                    user={user } 
+                    user={user} 
                     addresses={addresses}
                     setAddresses={setAddresses}
                 />

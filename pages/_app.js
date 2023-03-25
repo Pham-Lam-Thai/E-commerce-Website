@@ -36,8 +36,8 @@ function MyApp({ Component,  pageProps: { session, ...pageProps } }) {
                 pauseOnHover
                 theme="colored"
                 />
+              <Component {...pageProps}/>
             </PayPalScriptProvider>
-            <Component {...pageProps}/>
           </PersistGate>
         </Provider>
       </SessionProvider>
