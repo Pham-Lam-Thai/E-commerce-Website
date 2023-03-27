@@ -36,6 +36,7 @@ export const changeActiveAddress = async (id) => {
 
 export const deleteAddress = async (id) => {
   try {
+    console.log(id)
     const { data } = await axios.delete("/api/user/manageAddress", {
       data: { id },
     });
