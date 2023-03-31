@@ -8,15 +8,13 @@ handler.post(async (req, res) => {
   try {
     db.connectDb();
     const { address } = req.body;
-    const user = User.findById(req.user);
-    console.log('user', user)
-    await user.updateOne({
+    const user = await User.findByIdAndUpdate(req.user, {
       $push: {
         address: address,
-      }
-    });
+      },
+    }, { new: true });
+
     db.disconnectDb();
-    console.log(user.address)
     console.log('{ addresses: user.address }', { addresses: user.address })
     return res.json({ addresses: user.address });
   } catch (error) {

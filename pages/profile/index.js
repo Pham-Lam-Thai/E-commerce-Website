@@ -4,7 +4,9 @@ import Layout from "../../components/profile/layout";
 export default function index({user, tab}) {
     console.log(user?.user );
   return (
-    <Layout session={user} tab={tab} >index</Layout>
+    <Layout session={user} tab={tab} >
+      
+    </Layout>
   )
 }
  export async function getServerSideProps(ctx){

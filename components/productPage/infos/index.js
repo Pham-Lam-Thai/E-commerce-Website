@@ -14,6 +14,7 @@ import SimillarSwiper from "./simillarSwiper";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import {addToCart, updateCart} from "../../../store/cartSlice";
+import DialogModal from "@/components/dialogModal";
 export default function Infos({product}) {
     const router = useRouter();
     const dispatch = useDispatch();
@@ -74,6 +75,7 @@ export default function Infos({product}) {
       };
   return (
     <div className={styles.infos}>
+      {/* <DialogModal type="success"/> */}
         <div className={styles.infos_container}>
             <h1 className={styles.infos_name}>{product.name}</h1>
             <h2 className={styles.infos_sku}>{product.sku}</h2>
@@ -161,7 +163,7 @@ export default function Infos({product}) {
                     <BsHandbagFill/>
                     <b>ADD TO CARD</b>
                 </button>
-                <button>
+                <button onClick={() =>handleWishlist()}>
                     <BsHeart/>
                     WISHLIST
                 </button>

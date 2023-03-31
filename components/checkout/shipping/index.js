@@ -25,7 +25,7 @@ const initialValues = {
   country: "",
 
 }
-export default function Shipping({ selectedAddress, setSelectedAddress, user, addresses,setAddresses }) {
+export default function Shipping({ selectedAddress, setSelectedAddress, user, addresses,setAddresses, profile }) {
   console.log('address--->',addresses)
   const [shipping, setShipping] = useState(initialValues);
   const [visible, setVisible] = useState(user?.address.length ? false : true);
@@ -89,20 +89,23 @@ export default function Shipping({ selectedAddress, setSelectedAddress, user, ad
     setAddresses(res.addresses);
   };
   const deleteHandler = async (id) => {
+    console.log('id', id);
     const res = await deleteAddress(id);
     setAddresses(res.addresses);
   };
   return (
     <div className={styles.shipping}>
-      <div className={styles.header}>
+      {!profile && (
+        <div className={styles.header}>
         <h3>Shipping Information</h3>
       </div>
+      )}
       <div className={styles.addresses}>
         {addresses.map((address) =>(
          <div style={{ position: "relative" }}>
           <div
            className={styles.address_delete}
-           onClick={() => deleteHandler(address._id)}
+           onClick={() => {deleteHandler(address._id)}}
           >
            <CgRemove/>
          </div>
@@ -112,7 +115,7 @@ export default function Shipping({ selectedAddress, setSelectedAddress, user, ad
             onClick={() => changeActiveHandler(address._id)}
           >
             <div className={styles.address_side}>
-              <img src={user.image} alt=""/>
+              <img src={profile ? user.user.image : user.image} alt=""/>
             </div>
             <div className={styles.address_col}>
               <span>

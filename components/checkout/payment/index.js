@@ -8,7 +8,7 @@ export default function Payment({ paymentMethod, setPaymentMethod, profile }) {
         <div className={styles.header}>
           <h3>Payment Method</h3>
         </div>
-      )}
+      )} 
       {paymentMethods.map((pm) => (
         <label
           htmlFor={pm.id}
