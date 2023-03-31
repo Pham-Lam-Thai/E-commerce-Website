@@ -1,11 +1,11 @@
 import nc from "next-connect";
 import auth from "../../../middleware/auth";
-//import admin from "../../../middleware/admin";
+import admin from "../../../middleware/admin";
 import Category from "../../../models/Category";
 import SubCategory from "../../../models/SubCategory";
 import db from "../../../utils/db";
 import slugify from "slugify";
-const handler = nc().use(auth);
+const handler = nc().use(auth).use(admin);
 
 handler.post(async (req, res) => {
   try {
@@ -79,4 +79,22 @@ handler.get(async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
+handler.get(async (req, res) => {
+  try {
+    const { category } = req.query;
+    console.log(category);
+    if (!category) {
+      return res.json([]);
+    }
+    db.connectDb();
+    const results = await SubCategory.find({ parent: category }).select("name");
+    console.log(results);
+    db.disconnectDb();
+    return res.json(results);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 export default handler;

@@ -89,7 +89,7 @@ export default function signin({providers}) {
                     />
                     <CircledIconBtn type="submit" text="Sign in"/>
                     <div  className={styles.forgot}>
-                      <Link href="/forget">Forgot Password ?</Link>
+                      <Link href="/auth/forgot">Forgot Password ?</Link>
                     </div>
                   </Form>
                 )}

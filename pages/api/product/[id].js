@@ -15,7 +15,7 @@ handler.get(async (req, res) => {
     let priceBefore = product.subProducts[style].sizes[size].price;
     let price = discount ? priceBefore - priceBefore / discount : priceBefore;
     db.disconnectDb();
-    return res.json({
+    return res.json({ 
       _id: product._id,
       style: Number(style),
       name: product.name,
@@ -23,7 +23,7 @@ handler.get(async (req, res) => {
       slug: product.slug,
       sku: product.subProducts[style].sku,
       brand: product.brand,
-      //category: product.category,
+      category: product.category,
       subCategories: product.subCategories,
       shipping: product.shipping,
       images: product.subProducts[style].images,
