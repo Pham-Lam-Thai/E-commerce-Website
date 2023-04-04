@@ -445,37 +445,37 @@ export const women_swiper = [
   {
     name: "HARRY POTTER | SHEIN Checkered & Snake Pattern Sweater Vest Without Blouse",
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/06/21/1655799794344eb21cae76cf679de869f6b6e41229_thumbnail_600x.webp",
+      "https://img.ltwebstatic.com/images3_pi/2023/03/15/1678845511693ddda29f689d4279961d8477fc9d82_thumbnail_900x.webp",
     price: "103",
   },
   {
     name: "Blazer manches cape à bouton",
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/09/13/1663060175905a8d4a3995fd5bc4c4827114c4b070_thumbnail_900x.webp",
+      "https://img.ltwebstatic.com/images3_pi/2023/03/23/167953959956b98f69f910c4d432acfb9c781903e8_thumbnail_900x.webp",
     price: "58",
   },
   {
     name: "SHEIN X Zhihan Wang Sweat-shirt dessin animé et slogan",
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/09/29/1664415954a61747c30c7e9576fd4374354dad4b54_thumbnail_900x.webp",
+      "https://img.ltwebstatic.com/images3_pi/2023/02/16/1676517596293201f5641705ef46aa96e082887d19_thumbnail_900x.webp",
     price: "12.99",
   },
   {
     name: "ROMWE Grunge Punk Sweat-shirt à capuche à imprimé lettre et graphique à cordon",
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/09/14/166312290414845f283801744986928b2d3dd8d2a9_thumbnail_405x552.webp",
+      "https://img.ltwebstatic.com/images3_pi/2023/03/23/1679549363f15ef19131e785eac098eb1f4efd663f_thumbnail_900x.webp",
     price: "396",
   },
   {
     name: "15pcs Gemstone & Rhinestone Decor Ring",
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/08/24/16613054802b93849c39b4b566941f1b5ebe9a1626_thumbnail_600x.webp",
+      "https://img.ltwebstatic.com/images3_pi/2023/03/02/167772129795c9a9637394cbf93b77d241263106c4_thumbnail_900x.webp",
     price: "5.31",
   },
   {
     name: "5pcs Halloween Pumpkin & Ghost Design Shoe Decoration",
     image:
-      "https://img.ltwebstatic.com/images3_pi/2022/08/18/166082359241270ee7699993abcaefaad6fdedcfc2_thumbnail_600x.webp",
+      "https://img.ltwebstatic.com/images3_pi/2023/03/09/16783497478c4793cd3f3aee86c3e5257bb173b661_thumbnail_900x.webp",
     price: "79.25",
   },
   {
