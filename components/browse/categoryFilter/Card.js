@@ -4,7 +4,7 @@ import { FaMinus } from "react-icons/fa";
 import { useState } from "react";
 export default function Card({ category, categoryHandler, replaceQuery }) {
   const [show, setShow] = useState(false);
-  //const check = replaceQuery("category", category._id);
+  const check = replaceQuery("category", category._id);
   return (
     <>
       <section>
@@ -13,7 +13,7 @@ export default function Card({ category, categoryHandler, replaceQuery }) {
             type="radio"
             name="filter"
             id={category._id}
-            //checked={check.active}
+            checked={check.active}
           />
           <label htmlFor={category._id}>
             <a>{category.name}</a>

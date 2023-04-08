@@ -52,6 +52,7 @@ handler.post(async (req, res) => {
           },
         ],
       });
+    console.log('newProduct', newProduct)
       await newProduct.save();
       res.status(200).json({ message: "Product created Successfully.✅✅✅" });
     }

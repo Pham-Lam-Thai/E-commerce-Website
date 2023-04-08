@@ -20,18 +20,18 @@ export default function PatternsFilter({
       {show && (
         <div className={styles.filter_sizes}>
           {patterns.map((pattern, i) => {
-            //const check = replaceQuery("pattern", pattern);
+            const check = replaceQuery("pattern", pattern);
             return (
               <label
                 htmlFor={pattern}
                 className={styles.filter_sizes_size}
-                onClick={() => patternHandler(pattern)}
+                onClick={() => patternHandler(check.result)}
               >
                 <input
                   type="checkbox"
                   name="pattern"
                   id={pattern}
-                  //checked={check.active}
+                  checked={check.active}
                 />
                 <label htmlFor={pattern}>
                   {pattern.length > 12

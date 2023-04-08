@@ -74,7 +74,7 @@ export default function ListItem({ coupon, setCoupons }) {
             <DesktopDatePicker
               label="Start Date"
               inputFormat="MM/dd/yyyy"
-              value={startDate}
+              value={new Date(startDate)}
               onChange={handleStartDate}
               renderInput={(params) => <TextField {...params} />}
               minDate={new Date()}
@@ -82,7 +82,7 @@ export default function ListItem({ coupon, setCoupons }) {
             <DesktopDatePicker
               label="End Date"
               inputFormat="MM/dd/yyyy"
-              value={endDate}
+              value={new Date(endDate)}
               onChange={handleEndDate}
               renderInput={(params) => <TextField {...params} />}
               minDate={tomorrow}

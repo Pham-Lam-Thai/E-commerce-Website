@@ -9,6 +9,7 @@ export default async ( req, res, next) =>{
     });
     db.connectDb();
      let user = await User.findById(token.sub);
+     console.log(user)
     db.disconnectDb();
     if( user.role == "admin"){
         next();

@@ -12,11 +12,15 @@ export default function ColorsFilter({ colors, colorHandler, replaceQuery }) {
       </h3>
       {show && (
         <div className={styles.filter_colors}>
-          {colors.map((color, i) => {       
-              <button 
-                style={{ background: `${color}` }} 
-                onClick={() => colorHandler(color)}
+          {colors.map((color, i) => {
+            const check = replaceQuery("color", color);
+            return (
+              <button
+                style={{ background: `${color}` }}
+                className={check.active ? styles.activeFilterColor : ""}
+                onClick={() => colorHandler(check.result)}
               ></button>
+            );
           })}
         </div>
       )}

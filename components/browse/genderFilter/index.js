@@ -15,8 +15,8 @@ export default function GenderFilter({ genderHandler, replaceQuery }) {
       {show && (
         <div className={styles.filter_sizes}>
           {genders.map((gender, i) => {
-            //const check = replaceQuery("gender", gender);
-            //return (
+            const check = replaceQuery("gender", gender);
+            return (
               <label
                 htmlFor={gender}
                 className={styles.filter_sizes_size}
@@ -26,11 +26,11 @@ export default function GenderFilter({ genderHandler, replaceQuery }) {
                   type="checkbox"
                   name="gender"
                   id={gender}
-                  //checked={check.active}
+                  checked={check.active}
                 />
                 <label htmlFor={gender}>{gender}</label>
               </label>
-            //);
+            );
           })}
         </div>
       )}

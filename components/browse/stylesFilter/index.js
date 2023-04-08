@@ -15,7 +15,7 @@ export default function StyleFilter({ data, styleHandler, replaceQuery }) {
       {show && (
         <div className={styles.filter_sizes}>
           {data.map((style, i) => {
-            //const check = replaceQuery("style", style);
+            const check = replaceQuery("style", style);
               <div
                 className={styles.filter_sizes_size}
                 onClick={() => styleHandler(style)}
@@ -24,7 +24,7 @@ export default function StyleFilter({ data, styleHandler, replaceQuery }) {
                   type="checkbox"
                   name="style"
                   id={style}
-                  //checked={check.active}
+                  checked={check.active}
                 />
                 <label htmlFor={style}>{style}</label>
               </div>

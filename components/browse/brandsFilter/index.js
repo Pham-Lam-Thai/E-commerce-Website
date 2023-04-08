@@ -1,30 +1,34 @@
-import { useRouter } from "next/router";
 import { useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 import { FaMinus } from "react-icons/fa";
 import styles from "../styles.module.scss";
+import { useRouter } from "next/router";
 
-export default function BrandsFilter({ brands, brandHandler}) {
-  const [show, setShow] = useState(true);
+export default function BrandsFilter({ brands, brandHandler, replaceQuery }) {
   const router = useRouter();
-
+  const [show, setShow] = useState(true);
   return (
     <div className={styles.filter}>
-        <h3>
-            Brands <span>{show ? <FaMinus /> : <BsPlusLg />}</span>
-        </h3>
-        {show && (
-            <div className={styles.filter_sizes}>
-                {brands.map((brand, i) => (
-                    <button 
-                        className={styles.filter_brand} 
-                        onClick={() =>brandHandler(brand)}
-                    >
-                        <img src={`../../../images/brands/${brand}.png`} alt=""/>
-                    </button>
-                ))}
-            </div>
-        )}
-  </div>
-  )
+      <h3>
+        Brands <span>{show ? <FaMinus /> : <BsPlusLg />}</span>
+      </h3>
+      {show && (
+        <div className={styles.filter_sizes}>
+          {brands.map((brand, i) => {
+            const check = replaceQuery("brand", brand);
+            return (
+              <button
+                className={`${styles.filter_brand} ${
+                  check.active ? styles.activeFilter : ""
+                }`}
+                onClick={() => brandHandler(check.result)}
+              >
+                <img src={`../../../images/brands/${brand}.png`} alt="" />
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
 }

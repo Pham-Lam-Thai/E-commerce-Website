@@ -14,8 +14,10 @@ import Category from "@/models/Category";
 import Product from "@/models/Product";
 import SubCategory from "@/models/SubCategory";
 import { filterArray, removeDuplicates, randomize } from "@/utils/arrays_utils";
+import { Pagination } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
 import styles from "../styles/browse.module.scss";
 import db from "../utils/db";
 
@@ -30,6 +32,8 @@ export default function browse(
     stylesData,
     patterns,
     materials,
+    paginationCount,
+    country,
 }) {
         // console.log('stylesData---->',stylesData)
         // console.log('patterns',patterns)
@@ -37,7 +41,7 @@ export default function browse(
 //----------------------------------------->
 //----------------------------------------->
     const router = useRouter();
-    const filter = ({ search, category, brand, style, size,color,gender,material,pattern}) => {
+    const filter = ({ search, category, brand, style, size,color,gender,material,pattern, price,shipping,rating,sort,page}) => {
         const path = router.pathname;
         const { query } = router;
         if(search) query.search=search;
@@ -49,13 +53,17 @@ export default function browse(
         if(pattern) query.pattern=pattern;
         if(material) query.material=material;
         if(gender) query.gender=gender;
-
+        if(price) query.price=price;
+        if(shipping) query.shipping=shipping;
+        if(rating) query.rating=rating;
+        if (sort) query.sort = sort;
+        if (page) query.page = page;
         router.push({
             pathname: path,
             query: query,
         });
     };
-
+//----------------------------------------->
     const searchHandler = (search) =>{
         if(search == ""){
             filter({ search: {} });
@@ -91,44 +99,176 @@ export default function browse(
           filter({ gender });
         }
     };
+    const priceHandler = (price, type) => {
+        let priceQuery = router.query.price?.split("_") || "";
+        let min = priceQuery[0] || "";
+        let max = priceQuery[1] || "";
+        let newPrice = "";
+        if (type == "min") {
+          newPrice = `${price}_${max}`;
+        } else {
+          newPrice = `${min}_${price}`;
+        }
+        filter({ price: newPrice });
+    };
+    const multiPriceHandler = (min, max) => {
+        filter({ price: `${min}_${max}` });
+    };
+    const shippingHandler = (shipping) => {
+        filter({ shipping });
+    };
+    const ratingHandler = (rating) => {
+        filter({ rating });
+    };
+    const sortHandler = (sort) => {
+        if (sort == "") {
+          filter({ sort: {} });
+        } else {
+          filter({ sort });
+        }
+      };
+    const pageHandler = (e, page) => {
+        filter({ page });
+    };
+//-------------------------------------------------->
+    function checkChecked(queryName, value) {
+        if (router.query[queryName]?.search(value) !== -1) {
+          return true;
+        }
+        return false;
+    }
+    function replaceQuery(queryName, value) {
+        const existedQuery = router.query[queryName];
+        const valueCheck = existedQuery?.search(value);
+        const _check = existedQuery?.search(`_${value}`);
+        let result = "";
+        if (existedQuery) {
+          if (existedQuery == value) {
+            result = {};
+          } else {
+            if (valueCheck !== -1) {
+              if (_check !== -1) {
+                result = existedQuery?.replace(`_${value}`, "");
+              } else if (valueCheck == 0) {
+                result = existedQuery?.replace(`${value}_`, "");
+              } else {
+                result = existedQuery?.replace(value, "");
+              }
+            } else {
+              result = `${existedQuery}_${value}`;
+            }
+          }
+        } else {
+          result = value;
+        }
+        return {
+          result,
+          active: existedQuery && valueCheck !== -1 ? true : false,
+        };
+    }
+    const [scrollY, setScrollY] = useState(0);
+    const [height, setHeight] = useState(0);
+    const headerRef = useRef(null);
+    const el = useRef(null);
+    useEffect(() => {
+        const handleScroll = () => {
+        setScrollY(window.scrollY);
+        };
+        handleScroll();
+        window.addEventListener("scroll", handleScroll);
+        setHeight(headerRef.current?.offsetHeight + el.current?.offsetHeight);
+        return () => {
+        window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+    console.log(scrollY, height);
 //----------------------------------------->
 
   return (
     <div className={styles.browse}>
-        <Header searchHandler={searchHandler}/>
+        <div ref={headerRef}>
+            <Header searchHandler={searchHandler} country={country} />
+        </div>
         <div className={styles.browse_container}>
-            <div className={styles.browse_path}>
-                    Home / Browse
+            <div ref={el}>
+                <div className={styles.browse_path}> Home / Browse</div>
+                <div className={styles.browse_tags}>
+                    {categories.map((c) =>(
+                        <Link href="" key={c._id}>
+                            <a>{c.name}</a>
+                        </Link>
+                    ))}
+                </div>
             </div>
-            <div className={styles.browse_tags}>
-                {categories.map((c) =>(
-                    <Link href="" key={c._id}>
-                        <a>{c.name}</a>
-                    </Link>
-                ))}
-            </div>
-            <div className={styles.browse_store}>
+            <div className={`${styles.browse_store} ${
+                scrollY >= height ? styles.fixed : ""
+            }`}>
                 <div className={`${styles.browse_store_filters} ${styles.scrollbar}`} >
-                    <button className={styles.browse_clearBtn}> Clear All (3) </button>
+                     <button 
+                        className={styles.browse_clearBtn}
+                        onClick={() => router.push("/browse")}
+                    > 
+                        Clear All ({Object.keys(router.query).length}) 
+                    </button>
                     <CategoryFilter
                         categories={categories}
                         subCategories={subCategories}
                         categoryHandler={categoryHandler}
+                        replaceQuery={replaceQuery}
                     />
                     <SizesFilter sizes={sizes} sizeHandler={sizeHandler}/>
-                    <ColorsFilter colors={colors} colorHandler={colorHandler} />
-                    <BrandsFilter brands={brands} brandHandler={brandHandler}/>
-                    <StyleFilter data={stylesData} styleHandler={styleHandler}/>
-                    <PatternsFilter patterns={patterns} patternHandler={patternHandler} />
-                    <MaterialsFilter materials={materials} materialHandler={materialHandler} />
-                    <GenderFilter genderHandler={genderHandler}/>
+                    <ColorsFilter 
+                        colors={colors} 
+                        colorHandler={colorHandler} 
+                        replaceQuery={replaceQuery}
+                    />
+                    <BrandsFilter 
+                        brands={brands} 
+                        brandHandler={brandHandler}
+                        replaceQuery={replaceQuery}
+                    />
+                    <StyleFilter 
+                        data={stylesData} 
+                        styleHandler={styleHandler}
+                        replaceQuery={replaceQuery}
+                    />
+                    <PatternsFilter 
+                        patterns={patterns} 
+                        patternHandler={patternHandler}
+                        replaceQuery={replaceQuery}
+                    />
+                    <MaterialsFilter 
+                        materials={materials} 
+                        materialHandler={materialHandler} 
+                        replaceQuery={replaceQuery}
+                    />
+                    <GenderFilter 
+                        genderHandler={genderHandler}
+                        replaceQuery={replaceQuery}
+                    />
                 </div> 
                 <div className={styles.browse_store_products_wrap}>
-                    <HeadingFilters/>
+                    <HeadingFilters 
+                        priceHandler={priceHandler}
+                        multiPriceHandler={multiPriceHandler}
+                        shippingHandler={shippingHandler}
+                        ratingHandler={ratingHandler}
+                        replaceQuery={replaceQuery}
+                        sortHandler={sortHandler}
+                    />
                     <div className={styles.browse_store_products}>
                         {products.map((product) =>(
                             <ProductCard product={product} key={product._id}/>
                         ))}
+                    </div>
+                    <div className={styles.pagination}>
+                        <Pagination 
+                            count={paginationCount}
+                            defaultPage={Number(router.query.page) || 1}
+                            onChange={pageHandler}
+                            variant="outlined"
+                            color="primary" 
+                        />
                     </div>
                 </div>
             </div>
@@ -144,6 +284,13 @@ export async function getServerSideProps(ctx){
     const searchQuery = query.search || "";
     const categoryQuery = query.category || "";
     const genderQuery = query.gender || "";
+    const priceQuery = query.price?.split("_") || "";
+    const shippingQuery = query.shipping || 0;
+    const ratingQuery = query.rating || "";
+    const sortQuery = query.sort || "";
+    const pageSize = 30;
+    const page = query.page || 1;
+
 //---------------------
     const brandQuery = query.brand?.split("_") || "";
     const brandRegex = `^${brandQuery[0]}`;
@@ -268,6 +415,49 @@ export async function getServerSideProps(ctx){
             }
     : {};
 //----------------------------------------->
+    const price =
+        priceQuery && priceQuery !== ""
+        ? {
+            "subProducts.sizes.price": {
+                $gte: Number(priceQuery[0]) || 0,
+                $lte: Number(priceQuery[1]) || Infinity,
+            },
+            }
+    : {};
+//----------------------------------------->
+    const shipping =
+        shippingQuery && shippingQuery == "0"
+        ? {
+            shipping: 0,
+            }
+    : {};
+//----------------------------------------->
+    const rating =
+        ratingQuery && ratingQuery !== ""
+        ? {
+            rating: {
+                $gte: Number(ratingQuery),
+            },
+            }
+    : {};
+//----------------------------------------->
+    const sort =
+        sortQuery == ""
+            ? {}
+            : sortQuery == "popular"
+            ? { rating: -1, "subProducts.sold": -1 }
+            : sortQuery == "newest"
+            ? { createdAt: -1 }
+            : sortQuery == "topSelling"
+            ? { "subProducts.sold": -1 }
+            : sortQuery == "topReviewed"
+            ? { rating: -1 }
+            : sortQuery == "priceHighToLow"
+            ? { "subProducts.sizes.price": -1 }
+            : sortQuery == "priceLowToHigh"
+            ? { "subProducts.sizes.price": 1 }
+    : {};
+//----------------------------------------->
 
     db.connectDb();
     let productsDb = await Product.find({
@@ -280,10 +470,16 @@ export async function getServerSideProps(ctx){
         ...pattern,
         ...material,
         ...gender,
+        ...price,
+        ...shipping,
+        ...rating,
     })
-    .sort({ createdAt: -1})
+    .skip(pageSize * (page-1))
+    .limit(pageSize)
+    .sort(sort)
     .lean();
-    let products = randomize(productsDb);
+    let products =
+        sortQuery && sortQuery !== "" ? productsDb : randomize(productsDb);
     let categories = await Category.find().lean();
     let subCategories = await SubCategory.find().populate({
         path: "parent",
@@ -300,6 +496,20 @@ export async function getServerSideProps(ctx){
     let patterns = removeDuplicates(patternsDb);
     let materials = removeDuplicates(materialsDb);
     let brands = removeDuplicates(brandsDb);
+    let totalProducts = await Product.countDocuments({
+        ...search,
+        ...category,
+        ...brand,
+        ...style,
+        ...size,
+        ...color,
+        ...pattern,
+        ...material,
+        ...gender,
+        ...price,
+        ...shipping,
+        ...rating,
+    });
 
     return{
         props:{
@@ -312,6 +522,11 @@ export async function getServerSideProps(ctx){
             stylesData: styles,
             patterns,
             materials,
+            paginationCount: Math.ceil(totalProducts / pageSize),
+            country: {
+                name: "Vietnam",
+                flag: "https://cdn-icons-png.flaticon.com/512/5373/5373330.png?w360"
+            },
         },
     };
 }

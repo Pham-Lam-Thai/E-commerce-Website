@@ -19,8 +19,8 @@ export default function MaterialsFilter({
       {show && (
         <div className={styles.filter_sizes}>
           {materials.map((material, i) => {
-            //const check = replaceQuery("material", material);
-            //return (
+            const check = replaceQuery("material", material);
+            return (
               <label
                 htmlFor={material}
                 className={styles.filter_sizes_size}
@@ -30,7 +30,7 @@ export default function MaterialsFilter({
                   type="checkbox"
                   name="material"
                   id={material}
-                  //checked={check.active}
+                  checked={check.active}
                 />
                 <label htmlFor={material}>
                   {material.length > 12
@@ -38,7 +38,7 @@ export default function MaterialsFilter({
                     : material}
                 </label>
               </label>
-           // );
+            );
           })}
         </div>
       )}
